@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb2d;
     private int count;
     private Vector3 position;
+    public Joystick joystick;
+    float horizontalMove = 0f;
+    float verticalMove = 0f;
     // Start is called before the first frame update
 
     private void Start()
@@ -22,7 +25,31 @@ public class PlayerController : MonoBehaviour
         position = new Vector3(0.0f, 0.0f, 0.0f);
     }
 
-    private void FixedUpdate()
+    private void Update()
+    {
+        horizontalMove = joystick.Horizontal * speed;
+        verticalMove = joystick.Vertical * speed;
+        Vector2 movement = new Vector2(horizontalMove, verticalMove);
+        rb2d.AddForce(movement);
+     
+
+    }
+    /*
+     * 
+    
+    private void Update()
+    {
+        if (Input.touchCount > 0) // move object to finger position
+        {  
+            Touch touch = Input.GetTouch(0);
+            Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
+            touchPosition.z = 0;
+            transform.position = touchPosition;
+
+        }
+    }*/
+    /*
+    private void FixedUpdate() // move object with accelerometr
     {
         float moveHorizontal = Input.acceleration.x;
         //float moveHorizontal = Input.GetAxis("Horizontal"); //float moveHorizontal=Input.acceleration.x;
@@ -30,24 +57,9 @@ public class PlayerController : MonoBehaviour
        //float moveVertical = Input.GetAxis("Vertical"); //Input.acceleration.y
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
         rb2d.AddForce(movement*speed);
-        /*
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-
-            // Move the cube if the screen has the finger moving.
-            if (touch.phase == TouchPhase.Moved)
-            {
-                Vector2 pos = touch.position;
-                
-                position = new Vector3(-pos.x, pos.y, 0.0f);
-
-                // Position the cube.
-                transform.position = position;
-            }
-        }
-        */
-    }
+       
+        
+    }*/
 
     private void OnTriggerEnter2D(Collider2D other)
     {
