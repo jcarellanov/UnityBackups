@@ -30,7 +30,9 @@ public class PlayerController : MonoBehaviour
         horizontalMove = joystick.Horizontal * speed;
         verticalMove = joystick.Vertical * speed;
         Vector2 movement = new Vector2(horizontalMove, verticalMove);
-        rb2d.AddForce(movement);
+        //rb2d.AddForce(movement);
+        rb2d.velocity = movement;
+        
      
 
     }
