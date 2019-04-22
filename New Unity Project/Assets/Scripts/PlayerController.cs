@@ -65,6 +65,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+       // Debug.Log("Collision detected ");
+       // Debug.Log(other.gameObject.tag.ToString());
+
         if (other.gameObject.CompareTag("PickUp"))
         {
             other.gameObject.SetActive(false);
@@ -72,8 +75,27 @@ public class PlayerController : MonoBehaviour
             SetCountText();
         }
 
-        
+       // if (other.gameObject.CompareTag("Stone1"))
+       // {
+        //    other.gameObject.transform.SetParent(transform);
+        //    Debug.Log("Touched Stone1");
+       // }
+
+
     }
+    /*
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        Debug.Log("Collision detected ");
+        Debug.Log(other.gameObject.tag.ToString());
+
+        if (other.gameObject.tag.ToString()=="Stone1")
+        {
+            other.gameObject.transform.SetParent(transform);
+            Debug.Log("Touched Stone1");
+        }
+
+    }*/
 
     void SetCountText()
     {
