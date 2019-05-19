@@ -42,6 +42,7 @@ public class SinkFunction : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log(other.gameObject.tag.ToString());
         if(other.gameObject.tag.ToString()  == "Stone1")
         {
             other.gameObject.SetActive(false);
@@ -49,4 +50,6 @@ public class SinkFunction : MonoBehaviour
         }
 
     }
+
+    
 }
