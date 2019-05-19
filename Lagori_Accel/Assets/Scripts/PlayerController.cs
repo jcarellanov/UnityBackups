@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     private float horizontalMove = 0f;
     private float verticalMove = 0f;
     private Rigidbody2D rb2d;
+    private bool freeToCarry = true;
+
     
     // Start is called before the first frame update
     void Start()
@@ -38,7 +40,10 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) // OnTriggerEnter para los kinematicos
     {
         Debug.Log("Player Collision detected ");
-        
+        string otherTag = other.gameObject.tag.ToString();
+       
+
+       
 
         if (other.gameObject.CompareTag("PickUp"))
         {
@@ -46,17 +51,14 @@ public class PlayerController : MonoBehaviour
             
         }
 
-         if (other.gameObject.CompareTag("Stone1"))
+         if (otherTag.Contains("Stone") && freeToCarry )
          {
            other.gameObject.transform.SetParent(transform);
-           Debug.Log("Touched Stone1");
+           Debug.Log("Touched " + otherTag);
+            freeToCarry = false;
          }
 
-        if (other.gameObject.CompareTag("Walls"))
-        {
-            rb2d.velocity = new Vector2(0,0);
-            Debug.Log("Touched Wall");
-        }
+       
 
 
 

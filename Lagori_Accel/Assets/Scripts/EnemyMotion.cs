@@ -10,7 +10,7 @@ public class EnemyMotion : MonoBehaviour
     void Start()
     {
         enemyBody =  GetComponent<Rigidbody2D>();
-        Vector2 movement = new Vector2(Random.Range(-10, 10), Random.Range(-10, 10));
+        Vector2 movement = new Vector2(Random.Range(-40, 40), Random.Range(-40, 40));
         enemyBody.AddForce(movement*speed);
     }
 

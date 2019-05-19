@@ -43,11 +43,41 @@ public class SinkFunction : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log(other.gameObject.tag.ToString());
-        if(other.gameObject.tag.ToString()  == "Stone1")
+
+        switch (firstSprite)
         {
-            other.gameObject.SetActive(false);
-            Debug.Log("Stone Disappeared");
+            case 0:
+                if (other.gameObject.tag.ToString() == "Stone1")
+                    other.gameObject.SetActive(false);
+                break;
+
+            case 1:
+                if (other.gameObject.tag.ToString() == "Stone2")
+                    other.gameObject.SetActive(false);
+                break;
+
+            case 2:
+                if (other.gameObject.tag.ToString() == "Stone3")
+                    other.gameObject.SetActive(false);
+                break;
+
+            case 3:
+                if (other.gameObject.tag.ToString() == "Stone4")
+                    other.gameObject.SetActive(false);
+                break;
+
+            default:
+                break;
+
+
         }
+
+        /*
+        if (other.gameObject.tag.ToString()  == "Stone1")
+        { if(firstSprite==0)
+            other.gameObject.SetActive(false);
+            Debug.Log("Stone1 should have Disappeared");
+        }*/
 
     }
 
