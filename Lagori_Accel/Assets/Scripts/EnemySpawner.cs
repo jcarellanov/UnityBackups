@@ -23,7 +23,7 @@ public class EnemySpawner : MonoBehaviour
         {
             elapsedTime = 0;
             Vector3 spawnPosition = new Vector3(Random.Range(-10, 10), Random.Range(-6, 6), 0f);
-            GameObject newEnemy = (GameObject)Instantiate(enemyObject, spawnPosition, Quaternion.identity);
+            enemyObject = (GameObject)Instantiate(enemyObject, spawnPosition, Quaternion.identity);
             
            
         }

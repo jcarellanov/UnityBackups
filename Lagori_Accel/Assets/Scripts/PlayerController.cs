@@ -13,12 +13,19 @@ public class PlayerController : MonoBehaviour
     private float verticalMove = 0f;
     private Rigidbody2D rb2d;
     private bool freeToCarry = true;
+    UImanager UIreference;
+    //SinkFunction reference; //to pass freeToCarry between scripts
 
     
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        UIreference = GameObject.Find("Canvas").GetComponent<UImanager>();
+
+
+       // reference = GameObject.Find("Sink").GetComponent<SinkFunction>();
+      
 
     }
 
@@ -41,8 +48,8 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Player Collision detected ");
         string otherTag = other.gameObject.tag.ToString();
-       
 
+       // freeToCarry =  reference.getCanCarry();
        
 
         if (other.gameObject.CompareTag("PickUp"))
@@ -62,6 +69,23 @@ public class PlayerController : MonoBehaviour
 
 
 
+    }
+
+    public void  setCanCarry()
+    {
+        freeToCarry = true;
+        
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("Enemy Collision detected ");
+            UIreference.setGameOver();
+
+
+        }
     }
 
 }

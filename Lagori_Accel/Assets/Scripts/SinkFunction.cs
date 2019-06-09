@@ -9,6 +9,7 @@ public class SinkFunction : MonoBehaviour
     public float secondsBetweenChange = 0.0f;
     private float elapsedTime = 0.0f;
     private int firstSprite = 0;
+    PlayerController playerReference;
 
 
     private void Awake()
@@ -21,8 +22,8 @@ public class SinkFunction : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-    
-       
+
+        playerReference = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
 
@@ -49,21 +50,26 @@ public class SinkFunction : MonoBehaviour
             case 0:
                 if (other.gameObject.tag.ToString() == "Stone1")
                     other.gameObject.SetActive(false);
+                playerReference.setCanCarry();
+                  
                 break;
 
             case 1:
                 if (other.gameObject.tag.ToString() == "Stone2")
                     other.gameObject.SetActive(false);
+                playerReference.setCanCarry();
                 break;
 
             case 2:
                 if (other.gameObject.tag.ToString() == "Stone3")
                     other.gameObject.SetActive(false);
+                playerReference.setCanCarry();
                 break;
 
             case 3:
                 if (other.gameObject.tag.ToString() == "Stone4")
                     other.gameObject.SetActive(false);
+                playerReference.setCanCarry();
                 break;
 
             default:
@@ -71,6 +77,8 @@ public class SinkFunction : MonoBehaviour
 
 
         }
+
+        
 
         /*
         if (other.gameObject.tag.ToString()  == "Stone1")
@@ -81,5 +89,6 @@ public class SinkFunction : MonoBehaviour
 
     }
 
+    
     
 }
