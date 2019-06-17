@@ -1,19 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 
 public class PlayerController : MonoBehaviour
 {
     public float speed;
-    public Joystick horizontalJoystick;
-    public Joystick verticalJoystick;
+    //public Joystick horizontalJoystick;
+    //public Joystick verticalJoystick;
     private float horizontalMove = 0f;
     private float verticalMove = 0f;
     private Rigidbody2D rb2d;
     private bool freeToCarry = true;
     UImanager UIreference;
+    
     //SinkFunction reference; //to pass freeToCarry between scripts
 
     
@@ -22,6 +24,7 @@ public class PlayerController : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         UIreference = GameObject.Find("Canvas").GetComponent<UImanager>();
+        
 
 
        // reference = GameObject.Find("Sink").GetComponent<SinkFunction>();
@@ -37,9 +40,18 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        horizontalMove = horizontalJoystick.Horizontal * speed;
-        verticalMove = verticalJoystick.Vertical * speed;
-        Vector2 movement = new Vector2(horizontalMove, verticalMove);
+        Vector2 movement = new Vector2(0, 0);
+        horizontalMove = SimpleInput.GetAxis("Horizontal");
+        verticalMove = SimpleInput.GetAxis("Vertical");
+        horizontalMove = horizontalMove * speed;
+        verticalMove = verticalMove* speed;
+        if (Mathf.Abs(horizontalMove) > Mathf.Abs(verticalMove))
+            movement = new Vector2(horizontalMove, 0);
+        else if (Mathf.Abs(horizontalMove) < Mathf.Abs(verticalMove))
+            movement = new Vector2(0, verticalMove);
+        else
+            movement = new Vector2(0, 0);
+
         rb2d.velocity = movement;
 
     }
@@ -83,6 +95,8 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Enemy Collision detected ");
             UIreference.setGameOver();
+            SceneManager.LoadSceneAsync("GameOver");
+
 
 
         }
